@@ -1,0 +1,2 @@
+scc-firewall-manager-sdk
+requests

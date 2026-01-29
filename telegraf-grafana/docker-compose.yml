@@ -1,0 +1,49 @@
+version: "3.8"
+services:
+  influxdb:
+    image: influxdb:2.8
+    container_name: influxdb
+    volumes:
+      - influxdb-data:/var/lib/influxdb2
+    environment:
+      - DOCKER_INFLUXDB_INIT_MODE=setup
+      - DOCKER_INFLUXDB_INIT_USERNAME=admin
+      - DOCKER_INFLUXDB_INIT_PASSWORD=adminpass
+      - DOCKER_INFLUXDB_INIT_ORG=frivolous_fantasies_ltd
+      - DOCKER_INFLUXDB_INIT_BUCKET=cl_emear_bucket
+      - DOCKER_INFLUXDB_INIT_ADMIN_TOKEN=${INFLUXDB_TOKEN}
+    ports:
+      - "8086:8086"
+
+  telegraf:
+    build:
+      context: .
+      dockerfile: Dockerfile.telegraf
+    container_name: telegraf
+    depends_on:
+      - influxdb
+    volumes:
+      - ./telegraf.conf:/etc/telegraf/telegraf.conf:ro
+      - ./collect_metrics.py:/etc/telegraf/collect_metrics.py:ro
+      - ./tenants.json:/etc/telegraf/tenants.json:ro
+    environment:
+      - INFLUXDB_TOKEN=${INFLUXDB_TOKEN}
+    restart: unless-stopped
+
+  grafana:
+    image: grafana/grafana:10.3.1
+    container_name: grafana
+    depends_on:
+      - influxdb
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - INFLUXDB_TOKEN=${INFLUXDB_TOKEN}
+    volumes:
+      - grafana-data:/var/lib/grafana
+      - ./provisioning:/etc/grafana/provisioning:ro
+
+volumes:
+  influxdb-data:
+  grafana-data:
