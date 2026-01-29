@@ -1,1 +1,3 @@
 scc-firewall-manager-sdk
+webexpythonsdk
+python-dotenv
