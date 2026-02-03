@@ -1,10 +1,10 @@
 from argparse import ArgumentParser
-from time import sleep
 
 from scc_firewall_manager_sdk import MSPUserManagementApi, \
-    MspAddUsersToTenantInput, UserInput, TransactionsApi
+    MspAddUsersToTenantInput, UserInput
 
 import api_client_factory
+import transaction_service
 
 if __name__ == "__main__":
     parser = ArgumentParser()
@@ -38,7 +38,6 @@ if __name__ == "__main__":
 
     with api_client_factory.build_api_client() as api_client:
         msp_user_mgmt_api = MSPUserManagementApi(api_client)
-        transactions_api = TransactionsApi(api_client)
         print("Adding users to tenant...")
         transaction = msp_user_mgmt_api.add_users_to_tenant_in_msp_portal(
             args.tenant_uid,
@@ -46,18 +45,7 @@ if __name__ == "__main__":
                 users=user_inputs
             )
         )
-
-        print(
-            f"Created transaction with UID {transaction.transaction_uid}. Polling for transaction completion...")
-
-        while transaction.cdo_transaction_status not in ["DONE", "ERROR",
-                                                         "CANCELLED"]:
-            sleep(3)
-            print(
-                f"Current transaction status: {transaction.cdo_transaction_status}")
-            transaction = transactions_api.get_transaction(
-                transaction.transaction_uid)
-
+        transaction = transaction_service.wait_for_transaction_to_finish(transaction)
         print(
             f"{len(user_emails)} users created in managed organization {args.tenant_uid}. "
             f"Transaction status: {transaction.cdo_transaction_status}")

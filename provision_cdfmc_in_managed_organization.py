@@ -5,6 +5,7 @@ from scc_firewall_manager_sdk import MSPTenantManagementApi, TransactionsApi, \
     EnableCdFmcForTenantRequest
 
 import api_client_factory
+import transaction_service
 
 if __name__ == "__main__":
     parser = ArgumentParser()
@@ -21,14 +22,4 @@ if __name__ == "__main__":
         print(
             f"Created transaction with UID {transaction.transaction_uid}. Polling for transaction completion...")
 
-        while transaction.cdo_transaction_status not in ["DONE", "ERROR",
-                                                         "CANCELLED"]:
-            sleep(3)
-            print(
-                f"Current transaction status: {transaction.cdo_transaction_status}")
-            transaction = transactions_api.get_transaction(
-                transaction.transaction_uid)
-
-        print(
-            f"cdFMC provisioned in managed organization {args.tenant_uid}. "
-            f"Transaction status: {transaction.cdo_transaction_status}")
+        transaction_service.wait_for_transaction_to_finish(transaction)

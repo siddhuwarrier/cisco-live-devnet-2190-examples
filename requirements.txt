@@ -1,3 +1,6 @@
 scc-firewall-manager-sdk
 webexpythonsdk
 python-dotenv
+questionary
+rich
+requests
