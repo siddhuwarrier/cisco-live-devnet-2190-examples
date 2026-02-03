@@ -1,4 +1,4 @@
-# FMC Health Metrics with Telegraf, InfluxDB & Grafana
+# Device Health Metrics with Telegraf, InfluxDB & Grafana
 
 This stack collects health metrics from Security Cloud Control Firewall Manager (SCCFM) across **multiple tenants** and visualizes them using Grafana.
 
