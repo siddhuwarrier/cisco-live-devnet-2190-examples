@@ -3,8 +3,8 @@ from argparse import ArgumentParser
 from scc_firewall_manager_sdk import MSPUserManagementApi, \
     MspAddUsersToTenantInput, UserInput
 
-import api_client_factory
-import transaction_service
+from factories import api_client_factory
+from services import transaction_service
 
 if __name__ == "__main__":
     parser = ArgumentParser()

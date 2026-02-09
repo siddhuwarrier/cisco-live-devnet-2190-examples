@@ -16,8 +16,8 @@ from scc_firewall_manager_sdk import MSPDeviceUpgradesApi, \
     CompatibleVersionInfoDto, MSPInventoryApi, MspManagedDevice, \
     MspUpgradeFtdDevicesInput
 
-import api_client_factory
-import transaction_service
+from factories import api_client_factory
+from services import transaction_service
 
 
 def _build_upgrade_status_table(upgrade_run) -> Table:

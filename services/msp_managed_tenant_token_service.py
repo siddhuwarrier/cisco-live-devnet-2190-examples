@@ -2,8 +2,8 @@ from scc_firewall_manager_sdk import MSPUserManagementApi, \
     MspAddUsersToTenantInput, UserInput, UserRole, CdoTransaction, User, \
     MSPTenantManagementApi, MspManagedTenantDto
 
-import api_client_factory
-import transaction_service
+from factories import api_client_factory
+from services import transaction_service
 
 username = 'msp-automation-test-user'
 

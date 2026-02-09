@@ -1,11 +1,10 @@
 from argparse import ArgumentParser
-from time import sleep
 
 from scc_firewall_manager_sdk import MSPTenantManagementApi, TransactionsApi, \
     EnableCdFmcForTenantRequest
 
-import api_client_factory
-import transaction_service
+from factories import api_client_factory
+from services import transaction_service
 
 if __name__ == "__main__":
     parser = ArgumentParser()

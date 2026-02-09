@@ -10,9 +10,9 @@ Amsterdam.
 
 **This code is for educational and demonstration purposes only.** It is intentionally written to be
 clear and easy to understand for learning purposes, rather than following production-grade best
-practices. The code is not as DRY (Don't Repeat Yourself) as it could be, and some patterns are
-simplified for pedagogical reasons. **Do not use this code in production environments without
-significant refactoring and hardening.**
+practices. The code is not as DRY (Don't Repeat Yourself) as it could be with multiple repeated
+functions, and some patterns are simplified for pedagogical reasons. **Do not use this code in
+production environments without significant refactoring and hardening.**
 
 ## Prerequisites
 
@@ -190,7 +190,8 @@ region = "int"  # Change to: us, eu, apj, aus, in, uae, etc.
 
 ## Author & Presenter
 
-**Siddhu Warrier** is a Principal Engineer on the Security Cloud Control Firewall Manager team, based in
+**Siddhu Warrier** is a Principal Engineer on the Security Cloud Control Firewall Manager team,
+based in
 London. He is passionate about Test-Driven Development (TDD), and Continuous
 Delivery. Siddhu is a recipient of the distinguished speaker award, and has spoken at multiple Cisco
 Live events over the years.

@@ -4,3 +4,4 @@ python-dotenv
 questionary
 rich
 requests
+pexpect

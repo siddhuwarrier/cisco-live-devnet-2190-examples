@@ -4,14 +4,14 @@ from dotenv import load_dotenv
 from webexpythonsdk.models.cards import Container, TextBlock, ColumnSet, Column, \
     FontWeight, Colors, FontSize, Spacing, ContainerStyle, AdaptiveCard
 
-import webex_notification_service
+from services import webex_notification_service
 
 load_dotenv()
 
 from scc_firewall_manager_sdk import MSPLicensingApi, MspVirtualAccountDto, \
     MspSmartAccountDto, MspLicenseDto
 
-import api_client_factory
+from factories import api_client_factory
 
 
 # TODO for simplicity, I have not implemented pagination. That is fairly straighforward but I don't want to overcomplicate the demo code

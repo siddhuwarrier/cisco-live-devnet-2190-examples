@@ -1,3 +1,6 @@
+from typing import List
+
+
 class CdFmcAccessPolicy:
     def __init__(self, name: str, default_action: str = "BLOCK"):
         self.type = "AccessPolicy"
@@ -70,6 +73,29 @@ class SourceNetworks:
             "objects": [obj.to_dict() for obj in self.objects],
         }
 
+class DeviceBackupRequest:
+    def __init__(self, name: str, description: str, device_ids: List[str]):
+        self.name = name
+        self.description = description
+        self.devices = [DeviceBackupRequestDevice(device_id) for device_id in device_ids]
+
+    def to_dict(self):
+        return {
+            "name": self.name,
+            "description": self.description,
+            "devices": [device.to_dict() for device in self.devices],
+        }
+
+class DeviceBackupRequestDevice:
+    def __init__(self, device_id: str,  type:str = "Device"):
+        self.id = device_id
+        self.type = type
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "type": self.type,
+        }
 
 class CdFmcAccessRule:
     def __init__(
